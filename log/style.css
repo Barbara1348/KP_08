@@ -1,0 +1,125 @@
+/*main*/
+
+form button {
+    font-family: "Mazzard";
+    font-size: 1.4vw;
+    padding: 3%;
+    border-radius: 0.5vw;
+    background-image: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+    border: none;
+    color: white;
+    margin: 0.6vw 0 0 ;
+}
+
+.switch {
+    display: flex;
+    justify-content: center;
+}
+
+.switch button {
+    font-family: "Mazzard";
+    font-size: 1.4vw;
+    padding: 3%;
+    border-radius: 0.5vw;
+    background-color: transparent;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border: none;
+    color: white;
+    margin: 0 0 2vw;
+}
+
+main {
+    background-color: #262626;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4vw;
+    
+}
+
+.active {
+    background-image: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+}
+
+#registrationBtn, #authorizationBtn {
+    background-image: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+}
+
+.block {
+    width: 30%;
+}
+
+#loginForm.active_, #registForm.active_ {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    position: relative;
+}
+
+#loginForm, #registForm {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+}
+
+input::placeholder {
+    font-size: 1.1vw;
+    color: #9A9A9A;
+    font-family: "Mazzard";
+}
+
+input {
+    padding: 1vw 1vw 0.8vw;
+    border-radius: 0.5vw;
+    border: none;
+    font-size: 1.1vw;
+    color: black;
+    font-family: "Mazzard";
+}
+
+.modal {
+  display: none; /* Скрыто по умолчанию */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4); /* Полупрозрачный черный фон */
+}
+
+.modal_content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 5px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: black;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <img src="/assets/images/logo_header.svg" alt="">
+        <nav>
+            <ul>
+                <li>Главная</li>
+                <li>Программы</li>
+                <li>Команда</li>
+                <li>Партнеры</li>
+            </ul>
+            <a href="/log/">
+                <button>Личный кабинет</button>
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="block">
+            <div class="switch">
+                <button id="authorization">Авторизация</button>
+                <button id="registration">Регистрация</button>
+            </div>
+
+            <form id="loginForm">
+                <input type="email" name="login" id="loginAuth" placeholder="Логин" required>
+                <input type="password" name="password" id="passwordLogin" placeholder="Пароль" required>
+                <button type="submit" id="authorizationBtn">Войти</button>
+            </form>
+
+            <form id="registForm">
+                <input type="text" name="name" id="name" placeholder="Имя" required>
+                <input type="text" name="surname" id="surname" placeholder="Фамилия" required>
+                <input type="email" name="login" id="loginRegist" placeholder="Логин" required>
+                <input type="password" name="passwordRegist" id="passwordRegist" placeholder="Пароль" required>
+                <input type="password" name="password_Regist" id="password_Regist" placeholder="Подтверждение пароля"
+                    required>
+                <button type="submit" id="registrationBtn">Зарегистрироваться</button>
+            </form>
+            
+            <div id="myModal" class="modal">
+                <div class="modal_content">
+                    <span class="close">&times;</span>
+                    <p id="loginError"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="block_1_footer">
+            <img src="/assets/images/logo_header.svg" alt="">
+            <div class="about_platform">
+                <p>ДЕЙСТВИТЕЛЬНО УДОБНАЯ</p>
+                <p>ПЛАТФОРМА ДЛЯ ОБУЧЕНИЯ</p>
+            </div>
+        </div>
+        <div class="block_2_footer">
+            <div class="about_social">
+                <p>Мы в социальных сетях</p>
+                <div class="social_media">
+                    <img src="/assets/images/vk.svg">
+                    <img src="/assets/images/tg.svg">
+                </div>
+            </div>
+            <p>Пользовательское соглашение</p>
+        </div>
+    </footer>
+
+    <script src="/js/class.js"></script>
+    <script src="/js/log/script.js"></script>
+</body>
+
+</html>

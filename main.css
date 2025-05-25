@@ -1,0 +1,178 @@
+@font-face {
+    font-family: 'Mazzard';
+    src: local('Mazzard H Regular'), local('Mazzard-H-Regular'),
+        url('/assets/fonts/MazzardH-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mazzard B';
+    src: local('Mazzard L SemiBold'), local('Mazzard-L-SemiBold'),
+        url('/assets/fonts/MazzardL-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+
+
+
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+
+
+h1, h2, h3, h4, h5 {
+    color: white;
+}
+
+h1 {
+    font-size: 3.85vw;
+    letter-spacing: 1.5px;
+    font-family: "Mazzard";
+    font-weight: 300;
+}
+
+h2 {
+    font-size: 6.65vw;
+    letter-spacing: 1.05vw;
+    font-family: "Mazzard B";
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 2.45vw;
+    font-weight: 400;
+    font-family: "Mazzard";
+}
+
+h4 {
+    font-size: 2.5vw;
+    font-family: "Mazzard";
+    font-weight: 400;
+}
+
+h5 {
+    font-size: 1.8vw;
+    font-family: "Mazzard";
+    font-weight: 400;
+}
+
+main {
+    background-color: #262626;
+}
+
+
+
+
+
+/*header*/
+header {
+    background-color: #262626;
+    display: flex;
+    justify-content: space-between;
+    padding: 1% 8% ;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 3.5vw;
+}
+
+ul {
+    display: flex;
+    gap: 1vw;
+}
+
+ul li {
+    list-style: none;
+    font-size: 1.25vw;
+    color: white;
+    font-family: "Mazzard";
+    
+}
+
+nav button {
+    font-family: "Mazzard";
+    font-size: 1.25vw;
+    padding: 1vw;
+    width: 13vw;
+    border-radius: 0.5vw;
+    border: none;
+    background-image: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+    color: white;
+}
+
+header img {
+    width: 21%;
+}
+
+
+
+
+
+/*footer*/
+
+footer {
+    background-image: linear-gradient(to right bottom, #3A00B7 25%, #8301C3 63%, #CC02CE 89%);
+    display: flex;
+    padding: 3% 8%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.about_platform p {
+    font-size: 1.4vw;
+    color: white;
+    font-family: "Mazzard";
+    font-weight: 300;
+}
+
+.about_social p,
+.block_2_footer p {
+    font-size: 1.4vw;
+    color: white;
+    font-family: "Mazzard";
+    font-weight: 400;
+}
+
+.block_2_footer {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 2vw;
+}
+
+.about_social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vw;
+}
+
+.block_1_footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+
+    img {
+        width: 20vw;
+    }
+}
+
+.social_media {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+
+    img {
+        width: 3vw;
+    }
+}
