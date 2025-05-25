@@ -6,7 +6,7 @@ class UsersManager {
         const data = localStorage.getItem("newUsers");
         /**
          * Массив пользователей
-         * @type {Array}
+         * @type {Array<User>}
          */
         this.data = data ? JSON.parse(data) : [];
     }
@@ -149,6 +149,27 @@ class User {
     }
 
     /**
+     * Добавление курса
+     * @param {number} id курса для добавления
+    */
+    addCourse(
+        id,
+    ) {
+        this.IDcourses.push(id);
+    }
+
+    /**
+     * Проверка наличия курса
+     * @param {number} id курса для проверки
+     * @returns {boolean}
+    */
+    checkCourse(
+        id,
+    ) {
+        return this.IDcourses.some(item => item === id);
+    }
+
+    /**
      * Вывод данных пользователя в консоль
      */
     console(){
@@ -164,3 +185,37 @@ class User {
         )
     }
 };
+
+
+
+
+
+/**
+ * Менеджер работы с курсами
+ */
+class CoursesManager {
+    constructor() {
+        this.data = [
+            {
+                "id": 0,
+                "name": "Revit",
+            },
+            {
+                "id": 1,
+                "name": "3D's Max & Corona Render",
+            },
+            {
+                "id": 2,
+                "name": "SketchUp",
+            },
+            {
+                "id": 3,
+                "name": "Blender",
+            },
+            {
+                "id": 4,
+                "name": "ArchiCAD",
+            },
+        ];
+    }
+}

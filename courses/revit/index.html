@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +7,8 @@
     <link rel="stylesheet" href="/main.css">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <header>
+     <header>
         <img src="/assets/images/logo_header.svg" alt="">
         <nav>
             <ul>
@@ -26,16 +24,8 @@
     </header>
 
     <main>
-        <img src="/assets/images/archiCAD.svg" alt="">
-        <div class="switch">
-            <button id="infoUser">Основная информация</button>
-            <button id="myCourses" onclick="loadCourses()">Мои курсы</button>
-            <button id="mySertificates">Мои сертификаты</button>
-        </div>
+        <button onclick="startCourse(0)">Начать</button>
 
-        <div id="app">
-
-        </div>
     </main>
 
     <footer>
@@ -59,7 +49,6 @@
     </footer>
 
     <script src="/js/class.js"></script>
-    <script src="/js/profile/courses.js"></script>
+    <script src="/js/courses/startCourse.js"></script>
 </body>
-
 </html>
