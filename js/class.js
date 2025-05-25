@@ -6,27 +6,30 @@ class UsersManager {
         const data = localStorage.getItem("newUsers");
         /**
          * Массив пользователей
-         * @type {Array}
+         * @type {Array<User>}
          */
         this.data = data ? JSON.parse(data) : [];
     }
 
     /**
      * Добавление нового пользователя
+     * @param {string} surname фамилия
      * @param {string} name имя
-     * @param {string} login логин
+     * @param {string} username логин
      * @param {string} password пароль
      * @returns {User}
      */
     add(
+        surname,
         name, 
-        login, 
+        username, 
         password,
     ){
         const user = {
             "id": this.data.length + 1,
+            "surname": surname,
             "name": name,
-            "login": login,
+            "username": username,
             "password": password,
             "IDcourses": [],
         }
@@ -118,6 +121,11 @@ class User {
          * @type {number}
          */
         this.id = data.id;
+         /**
+         * Фамилия
+         * @type {string}
+         */
+        this.surname = data.surname;
         /**
          * Имя
          * @type {string}
@@ -127,7 +135,7 @@ class User {
          * Логин
          * @type {string}
          */
-        this.login = data.login;
+        this.username = data.username;
         /**
          * Пароль
          * @type {string}
@@ -141,14 +149,36 @@ class User {
     }
 
     /**
+     * Добавление курса
+     * @param {number} id курса для добавления
+    */
+    addCourse(
+        id,
+    ) {
+        this.IDcourses.push(id);
+    }
+
+    /**
+     * Проверка наличия курса
+     * @param {number} id курса для проверки
+     * @returns {boolean}
+    */
+    checkCourse(
+        id,
+    ) {
+        return this.IDcourses.some(item => item === id);
+    }
+
+    /**
      * Вывод данных пользователя в консоль
      */
     console(){
         console.table(
             {
                 "id": this.id,
+                "surname": this.surname,
                 "name": this.name,
-                "login": this.login,
+                "username": this.username,
                 "password": this.password,
                 "IDcourses": this.IDcourses,
             }
@@ -160,23 +190,32 @@ class User {
 
 
 
-
-
-let userManager = new UsersManager();
-// userManager.console();
-// let data = userManager.add(
-//     "Варвара",
-//     "Vary",
-//     "123",
-// );
-// let user = new User(data);
-
-userManager.console();
-userManager.setCurrentUser(9);
-let data = userManager.readCurrentUser();
-let user = new User(data);
-user.name = "Николай";
-user.IDcourses.push(5);
-userManager.edit(user.id, user);
-user.console();
-userManager.console();
+/**
+ * Менеджер работы с курсами
+ */
+class CoursesManager {
+    constructor() {
+        this.data = [
+            {
+                "id": 0,
+                "name": "Revit",
+            },
+            {
+                "id": 1,
+                "name": "3D's Max & Corona Render",
+            },
+            {
+                "id": 2,
+                "name": "SketchUp",
+            },
+            {
+                "id": 3,
+                "name": "Blender",
+            },
+            {
+                "id": 4,
+                "name": "ArchiCAD",
+            },
+        ];
+    }
+}
