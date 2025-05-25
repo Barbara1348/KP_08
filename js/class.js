@@ -13,20 +13,23 @@ class UsersManager {
 
     /**
      * Добавление нового пользователя
+     * @param {string} surname фамилия
      * @param {string} name имя
-     * @param {string} login логин
+     * @param {string} username логин
      * @param {string} password пароль
      * @returns {User}
      */
     add(
+        surname,
         name, 
-        login, 
+        username, 
         password,
     ){
         const user = {
             "id": this.data.length + 1,
+            "surname": surname,
             "name": name,
-            "login": login,
+            "username": username,
             "password": password,
             "IDcourses": [],
         }
@@ -118,6 +121,11 @@ class User {
          * @type {number}
          */
         this.id = data.id;
+         /**
+         * Фамилия
+         * @type {string}
+         */
+        this.surname = data.surname;
         /**
          * Имя
          * @type {string}
@@ -127,7 +135,7 @@ class User {
          * Логин
          * @type {string}
          */
-        this.login = data.login;
+        this.username = data.username;
         /**
          * Пароль
          * @type {string}
@@ -147,36 +155,12 @@ class User {
         console.table(
             {
                 "id": this.id,
+                "surname": this.surname,
                 "name": this.name,
-                "login": this.login,
+                "username": this.username,
                 "password": this.password,
                 "IDcourses": this.IDcourses,
             }
         )
     }
 };
-
-
-
-
-
-
-
-let userManager = new UsersManager();
-// userManager.console();
-// let data = userManager.add(
-//     "Варвара",
-//     "Vary",
-//     "123",
-// );
-// let user = new User(data);
-
-userManager.console();
-userManager.setCurrentUser(9);
-let data = userManager.readCurrentUser();
-let user = new User(data);
-user.name = "Николай";
-user.IDcourses.push(5);
-userManager.edit(user.id, user);
-user.console();
-userManager.console();
