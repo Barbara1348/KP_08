@@ -1,0 +1,104 @@
+.switch {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 25%;
+}
+
+.switch button {
+    font-family: "Mazzard";
+    font-size: 1.4vw;
+    border-radius: 0.5vw;
+    background-color: transparent;
+    width: 20vw;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border: none;
+    color: white;
+    padding: 1vw;
+}
+
+main {
+    padding: 6% 8%;
+    display: flex;
+    justify-content: space-between;
+    gap: 3vw;
+}
+
+.active {
+    background-image: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+}
+
+#infoUser, #myCourses, #mySertificates, #logOut {
+    padding: 1vw;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2vw;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: 3vw;
+}
+
+.fill {
+    background-color: #3d3d3d;
+    width: 100%;
+    border-radius: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-image: linear-gradient(140deg, #3A00B7 36%, #8301C3 63%, #CC02CE 89%);
+    height: 18vw;
+    border-radius: 1vw;
+    justify-content: space-between;
+    padding: 2vw 0;
+    width: 15vw;
+}
+
+.slide img {
+    max-width: 70%;
+}
+
+#courses.active_, #sertificates.active_, #logOut.active_, #info.active_ {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    position: relative;
+}
+
+#courses, #sertificates, #logOut, #info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+}
+
+input {
+    font-size: 1.1vw;
+    font-family: "Mazzard";
+    padding: 1vw 1vw 0.8vw;
+    border-radius: 0.5vw;
+    border: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    gap: 1vw;
+}

@@ -76,7 +76,7 @@ registForm.addEventListener("submit", (e) => {
         );
         userManager.setCurrentUser(data.id);
         window.location.href = "/profile/";
-    }, 2000)
+    }, 1500)
 });
 
 //далее авторизация
@@ -125,5 +125,5 @@ loginForm.addEventListener("submit", (e) => {
     setTimeout(() => {
         userManager.setCurrentUser(foundUser.id);
         window.location.href = "/profile/";
-    }, 2000);
+    }, 1500);
 });

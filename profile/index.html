@@ -26,16 +26,38 @@
     </header>
 
     <main>
-        <img src="/assets/images/archiCAD.svg" alt="">
-        <div class="switch">
-            <button id="infoUser">Основная информация</button>
-            <button id="myCourses" onclick="loadCourses()">Мои курсы</button>
-            <button id="mySertificates">Мои сертификаты</button>
+        <div class="profile">
+            <img src="/assets/images/archiCAD.svg" alt="">
+            <div class="switch">
+                <button id="infoUserBtn" onclick="loadInfo()" class="active">Основная информация</button>
+                <button id="myCoursesBtn" onclick="loadCourses()">Мои курсы</button>
+                <button id="mySertificatesBtn" onclick="loadSertificates()">Мои сертификаты</button>
+                <button id="logOutBtn" onclick="logOut()">Выйти</button>
+            </div>
         </div>
-
-        <div id="app">
-
+        <div class="fill" id="courses">
+            <div class="container" id="app">
+                <div class="slide">
+                    <h5></h5>
+                    <img>
+                </div>
+            </div>
         </div>
+        <div class="fill" id="info">
+            <div class="container2" id="app2">
+                <form id="formProfile">
+                    <input type="text" name="surname">
+                    <input type="text" name="name">
+                    <input type="email" name="login">
+                    <input type="password" name="password">
+                </form>
+            </div>
+        </div>
+        <div class="fill" id="sertificates">
+            <h5>У вас пока нет сертификатов</h5>
+        </div>
+        
+        
     </main>
 
     <footer>
@@ -60,6 +82,9 @@
 
     <script src="/js/class.js"></script>
     <script src="/js/profile/courses.js"></script>
+    <script src="/js/profile/info.js"></script>
+    <script src="/js/profile/sertificates.js"></script>
+    <script src="/js/profile/logOut.js"></script>
 </body>
 
 </html>

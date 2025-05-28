@@ -199,22 +199,27 @@ class CoursesManager {
             {
                 "id": 0,
                 "name": "Revit",
+                "image": "/assets/images/revit.svg",
             },
             {
                 "id": 1,
                 "name": "3D's Max & Corona Render",
+                "image": "/assets/images/3Ds_Max_Corona_Render.svg",
             },
             {
                 "id": 2,
                 "name": "SketchUp",
+                "image": "/assets/images/SketchUp.svg",
             },
             {
                 "id": 3,
                 "name": "Blender",
+                "image": "/assets/images/blender.svg",
             },
             {
                 "id": 4,
                 "name": "ArchiCAD",
+                "image": "/assets/images/archiCAD.svg",
             },
         ];
     }
