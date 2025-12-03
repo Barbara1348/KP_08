@@ -27,6 +27,8 @@ registForm.addEventListener("submit", (e) => {
     const name = document.getElementById("name").value.trim();
     const surname = document.getElementById("surname").value.trim();
     const password = document.getElementById("passwordRegist").value;
+    const checkbox = document.getElementById("checkbox");
+
     const confirmPassword = document.getElementById("password_Regist").value;
     const errorElem = document.getElementById("loginError");
 
@@ -49,6 +51,13 @@ registForm.addEventListener("submit", (e) => {
 
     if (password !== confirmPassword) {
         errorElem.innerText = "Неверное имя пользователя или пароль!";
+        modal.style.display = "block";
+        Modal();
+        return;
+    }
+
+    if (!checkbox.checked) {
+        errorElem.innerText = "Примите соглашение!";
         modal.style.display = "block";
         Modal();
         return;

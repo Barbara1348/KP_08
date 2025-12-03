@@ -28,7 +28,11 @@
 
 
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
     color: white;
 }
 
@@ -81,7 +85,8 @@ header {
     background-color: #262626;
     display: flex;
     justify-content: space-between;
-    padding: 1% 8% ;
+    padding: 1% 8%;
+    border-bottom: 1px solid #989898;
 }
 
 nav {
@@ -100,7 +105,7 @@ ul li {
     font-size: 1.25vw;
     color: white;
     font-family: "Mazzard";
-    
+
 }
 
 nav button {
@@ -115,7 +120,7 @@ nav button {
 }
 
 header img {
-    width: 21%;
+    width: 17vw;
 }
 
 
@@ -150,14 +155,14 @@ footer {
 .block_2_footer {
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: start;
     gap: 2vw;
 }
 
 .about_social {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     gap: 1vw;
 }
 
@@ -167,7 +172,7 @@ footer {
     gap: 1vw;
 
     img {
-        width: 20vw;
+        width: 17vw;
     }
 }
 
@@ -179,4 +184,162 @@ footer {
     img {
         width: 3vw;
     }
+}
+
+
+
+
+nav button {
+    font-family: "Mazzard";
+    font-size: 1.25vw;
+    padding: 1vw;
+    width: 13vw;
+    border-radius: 0.5vw;
+    border: none;
+    background-image: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    z-index: 1;
+}
+
+nav button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+    transition: left 0.7s ease;
+    z-index: -1;
+}
+
+nav button:hover::before {
+    left: 100%;
+}
+
+nav button:hover {
+    background-image: linear-gradient(120deg, #4A11C7 18%, #9315D3 82%, #D416E8 100%);
+}
+
+a:hover {
+    transition: all 0.4s ease;
+    transform: scale(1.05);
+}
+
+.modal_content {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal {
+    color: black;
+    font-family: "Mazzard";
+}
+
+
+.modal {
+    display: none;
+    /* Скрыто по умолчанию */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Полупрозрачный черный фон */
+}
+
+.modal_content_edit {
+    background-color: #262626;
+    margin: 15% auto;
+    padding: 20px 20px 50px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 5px;
+    gap: 3vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    button {
+        font-family: "Mazzard";
+    font-size: 1.25vw;
+    padding: 1vw;
+    width: 70%;
+    border-radius: 0.5vw;
+    border: none;
+    background-image: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    z-index: 1;
+    }
+
+    button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent);
+        transition: left 0.7s ease;
+        z-index: -1;
+    }
+
+    button:hover::before {
+        left: 100%;
+    }
+
+    button:hover {
+        background-image: linear-gradient(120deg, #4A11C7 18%, #9315D3 82%, #D416E8 100%);
+    }
+
+
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex_ {
+    display: flex;
+    position: relative;
+    align-self: flex-end;
+}
+
+h5 {
+    color: white;
+    font-weight: 500;
 }

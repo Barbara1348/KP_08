@@ -1,4 +1,3 @@
-
 /**
  * Загрузка списка курсов пользователя 
  */
@@ -25,24 +24,36 @@ function loadCourses() {
 
     let user = new User(stateUser);
     let html = ``;
+    let hasCourses = false;
 
     coursesManager.data.forEach(course => {
         const stateCourse = user.checkCourse(course.id);
+       
         if (stateCourse) {
+            hasCourses = true;
             courses.classList.add("active_");
             sertificates.classList.remove("active_");
             info.classList.remove("active_");
 
             html += `
             <div class="slide">
-                    <h5>${course.name}</h5>
-                <img src="${course.image}">
+                <h5>${course.name}</h5>
+                <img src="${course.image}" alt="${course.name}">
             </div>
-        `;
+            `;
         }
-
     });
 
     const app = document.getElementById('app');
+    
+    // Если нет курсов, показываем сообщение
+    if (!hasCourses) {
+        courses.classList.add("active_");
+        sertificates.classList.remove("active_");
+        info.classList.remove("active_");
+        
+        html = `<h5>У вас пока нет активных курсов</h5>`;
+    }
+
     app.innerHTML = html;
 }

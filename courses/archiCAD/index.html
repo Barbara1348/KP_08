@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/courses/style.css">
+</head>
+
+<body>
+    <header>
+        <a href="/index.html">
+            <img src="/assets/images/logo_header.svg" alt="">
+        </a>
+        <nav>
+            <ul>
+                <a href="/index.html#section1">
+                    <li>Главная</li>
+                </a>
+                <a href="/index.html#section2">
+                    <li>Программы</li>
+                </a>
+                <a href="/index.html#section3">
+                    <li>Команда</li>
+                </a>
+                <a href="/index.html#section4">
+                    <li>Партнеры</li>
+                </a>
+            </ul>
+            <a href="/log/">
+                <button>Личный кабинет</button>
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <div>
+            <video src="/assets/videos/about_program.mp4" autoplay muted playsinline></video>
+            <p>«ArchiCAD» занимает особое место среди программ для архитектурного проектирования, предлагая законченное
+                решение для работы с информационными моделями зданий. Программа отличается глубокой проработкой именно
+                архитектурных аспектов проектирования, что делает ее особенно удобной для проектировщиков. В «ArchiCAD»
+                реализована концепция «виртуального здания», когда архитектор работает не с набором отдельных чертежей,
+                а с целостной цифровой моделью.</p>
+            <button onclick="startCourse(4)">Начать</button>
+        </div>
+        <div id="myModal" class="modal">
+            <div class="modal_content">
+                <span class="close">&times;</span>
+                <p id="loginError"></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="block_1_footer">
+            <a href="/index.html">
+                <img src="/assets/images/logo_header.svg" alt="">
+
+            </a>
+            <div class="about_platform">
+                <p>ДЕЙСТВИТЕЛЬНО УДОБНАЯ</p>
+                <p>ПЛАТФОРМА ДЛЯ ОБУЧЕНИЯ</p>
+            </div>
+        </div>
+        <div class="block_2_footer">
+            <div class="about_social">
+                <div class="social_media">
+                    <a href="https://m.vk.com/archivispro">
+                        <img src="/assets/images/vk.svg">
+                    </a>
+                    <a href="https://t.me/archivispro">
+                        <img src="/assets/images/tg.svg">
+                    </a>
+                </div>
+                <a href="/assets/images/Пользовательское_соглашение_архивис.pdf">
+                    <p>Пользовательское соглашение</p>
+                </a>
+            </div>
+            <p>Все права защищены</p>
+        </div>
+    </footer>
+
+    <script src="/js/class.js"></script>
+    <script src="/js/courses/startCourse.js"></script>
+    <script src="/js/log/log.js"></script>
+    <script src="/js/profile/sertificates.js"></script>
+</body>
+
+</html>

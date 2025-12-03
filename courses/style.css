@@ -1,0 +1,77 @@
+main p {
+    color: white;
+    font-size: 1.3vw;
+    font-family: "Mazzard";
+    font-weight: 400;
+    text-align: center;
+    width: 70%;
+}
+
+main div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vw;
+}
+
+video {
+    max-width: 60%;
+}
+
+main {
+    padding: 6% 8%;
+}
+
+div button {
+    font-family: "Mazzard";
+    font-size: 1.25vw;
+    padding: 1vw;
+    width: 13vw;
+    border-radius: 0.5vw;
+    border: none;
+    background-image: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+    color: white;
+}
+
+.modal {
+  display: none; /* Скрыто по умолчанию */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4); /* Полупрозрачный черный фон */
+  
+  color: #262626;
+
+  p {
+    
+    color: black;
+    font-family: "Mazzard";
+  }
+}
+
+.modal_content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 5px;
+  color: #262626;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: black;
+}

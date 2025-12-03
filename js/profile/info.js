@@ -22,7 +22,13 @@ function loadInfo() {
     let usersManager = new UsersManager();
     const stateUser = usersManager.readCurrentUser();
     console.log(stateUser);
-    if (!stateUser) throw new Error("Пользователь не авторизован");
+    
+    // Проверка авторизации
+    if (!stateUser) {
+        // Если пользователь не авторизован, перенаправляем на страницу входа
+        window.location.href = "/log/";
+        return;
+    }
 
     const form = document.getElementById("formProfile");
     form.surname.value = stateUser.surname;
@@ -30,3 +36,8 @@ function loadInfo() {
     form.login.value = stateUser.username;
     form.password.value = stateUser.password;
 }
+
+// Автоматически загружаем информацию при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    loadInfo();
+});

@@ -123,3 +123,83 @@ input {
 .close:hover {
   color: black;
 }
+
+#registrationBtn:hover,
+#authorizationBtn:hover {
+    background-image: linear-gradient(120deg, #4A11C7 18%, #9315D3 82%, #D416E8 100%);
+}
+
+#registrationBtn,
+#authorizationBtn {
+    font-family: "Mazzard";
+    font-size: 1.25vw;
+    padding: 1vw;
+    border-radius: 0.5vw;
+    border: none;
+    background-image: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    z-index: 1;
+}
+
+#registrationBtn::before,
+#authorizationBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent);
+    transition: left 0.7s ease;
+    z-index: -1;
+}
+
+#registrationBtn:hover::before,
+#authorizationBtn:hover::before  {
+    left: 100%;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 32px;
+    border-radius: 3px;
+    border: 1px solid white;
+    cursor: pointer;
+    position: relative;
+}
+
+input[type="checkbox"]:checked {
+    background-image: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+}
+
+input[type="checkbox"]:checked::before {
+    content: url(/assets/images/check.svg);
+    position: absolute;
+    left: 8px;
+    top: 8px;
+}
+
+.check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    p {
+        color: white;
+    font-family: "Mazzard";
+    }
+
+    span {
+        color: #8301C3;
+    }
+
+}

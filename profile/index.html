@@ -11,13 +11,23 @@
 
 <body>
     <header>
-        <img src="/assets/images/logo_header.svg" alt="">
+        <a href="/index.html">
+            <img src="/assets/images/logo_header.svg" alt="">
+        </a>
         <nav>
             <ul>
-                <li>Главная</li>
-                <li>Программы</li>
-                <li>Команда</li>
-                <li>Партнеры</li>
+                <a href="/index.html#section1">
+                    <li>Главная</li>
+                </a>
+                <a href="/index.html#section2">
+                    <li>Программы</li>
+                </a>
+                <a href="/index.html#section3">
+                    <li>Команда</li>
+                </a>
+                <a href="/index.html#section4">
+                    <li>Партнеры</li>
+                </a>
             </ul>
             <a href="/log/">
                 <button>Личный кабинет</button>
@@ -27,7 +37,7 @@
 
     <main>
         <div class="profile">
-            <img src="/assets/images/archiCAD.svg" alt="">
+            <img src="/assets/images/profile.svg" alt="">
             <div class="switch">
                 <button id="infoUserBtn" onclick="loadInfo()" class="active">Основная информация</button>
                 <button id="myCoursesBtn" onclick="loadCourses()">Мои курсы</button>
@@ -43,26 +53,37 @@
                 </div>
             </div>
         </div>
-        <div class="fill" id="info">
+        <div class="fill active_" id="info">
             <div class="container2" id="app2">
                 <form id="formProfile">
-                    <input type="text" name="surname">
-                    <input type="text" name="name">
-                    <input type="email" name="login">
-                    <input type="password" name="password">
+                    <input type="text" name="surname" id="surname">
+                    <input type="text" name="name" id="name">
+                    <input type="email" name="login" id="username">
+                    <input type="password" name="password" id="password">
+                    <button type="submit" id="editBtn" onclick="edit()">Изменить</button>
                 </form>
             </div>
         </div>
+        <!-- Вставьте это в блок sertificates -->
         <div class="fill" id="sertificates">
-            <h5>У вас пока нет сертификатов</h5>
+            <div class="certificates-container" id="certificatesContainer">
+                <!-- Сертификаты будут генерироваться здесь -->
+            </div>
         </div>
-        
-        
+
+        <div id="myModal" class="modal">
+            <div class="modal_content_edit">
+                <span class="close">&times;</span>
+                <p id="loginError"></p>
+            </div>
+        </div>
     </main>
 
     <footer>
         <div class="block_1_footer">
-            <img src="/assets/images/logo_header.svg" alt="">
+            <a href="/index.html">
+                <img src="/assets/images/logo_header.svg" alt="">
+            </a>
             <div class="about_platform">
                 <p>ДЕЙСТВИТЕЛЬНО УДОБНАЯ</p>
                 <p>ПЛАТФОРМА ДЛЯ ОБУЧЕНИЯ</p>
@@ -70,13 +91,19 @@
         </div>
         <div class="block_2_footer">
             <div class="about_social">
-                <p>Мы в социальных сетях</p>
                 <div class="social_media">
-                    <img src="/assets/images/vk.svg">
-                    <img src="/assets/images/tg.svg">
+                    <a href="https://m.vk.com/archivispro">
+                        <img src="/assets/images/vk.svg">
+                    </a>
+                    <a href="https://t.me/archivispro">
+                        <img src="/assets/images/tg.svg">
+                    </a>
                 </div>
+                <a href="/assets/images/Пользовательское_соглашение_архивис.pdf">
+                    <p>Пользовательское соглашение</p>
+                </a>
             </div>
-            <p>Пользовательское соглашение</p>
+            <p>Все права защищены</p>
         </div>
     </footer>
 
@@ -85,6 +112,10 @@
     <script src="/js/profile/info.js"></script>
     <script src="/js/profile/sertificates.js"></script>
     <script src="/js/profile/logOut.js"></script>
+    <script src="/js/log/log.js"></script>
+    <script src="/js/profile/edit.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 
 </html>

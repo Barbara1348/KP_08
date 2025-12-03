@@ -11,40 +11,54 @@
 
 <body>
     <header>
-        <img src="/assets/images/logo_header.svg" alt="">
+        <a href="/index.html">
+            <img src="/assets/images/logo_header.svg" alt="">
+        </a>
         <nav>
             <ul>
-                <li>Главная</li>
-                <li>Программы</li>
-                <li>Команда</li>
-                <li>Партнеры</li>
+                <a href="#section1">
+                    <li>Главная</li>
+                </a>
+                <a href="#section2">
+                    <li>Программы</li>
+                </a>
+                <a href="#section3">
+                    <li>Команда</li>
+                </a>
+                <a href="#section4">
+                    <li>Партнеры</li>
+                </a>
             </ul>
-            <a href="/log/">
-                <button>Личный кабинет</button>
+            <a>
+                <button onclick="log()">Личный кабинет</button>
             </a>
         </nav>
     </header>
 
     <main>
-        <div class="block_1">
-            <h1>ДЕЙСТВИТЕЛЬНО</h1>
-            <h2>УДОБНАЯ</h2>
-            <h3>ПЛАТФОРМА ДЛЯ ОБУЧЕНИЯ</h3>
+        <div data-rellax-speed="3" class="block_1" id="section1">
+            <h1 class="block_1_1">ДЕЙСТВИТЕЛЬНО</h1>
+            <h2 class="block_1_1">УДОБНАЯ</h2>
+            <h3 class="block_1_1">ПЛАТФОРМА ДЛЯ ОБУЧЕНИЯ</h3>
         </div>
-        <div class="block_2">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.12.1/rellax.min.js"></script>
+        <script src="/js/parallax/parallax.js"></script>
+        <div class="block_2" id="section2">
             <h4>Программы</h4>
             <div class="slider">
-                <button class="button_slide" id="prevBtn">❮</button>
+                <button class="button_slide" id="prevBtn">
+                    <img src="/assets/images/arrow.svg" alt="">
+                </button>
                 <div class="slider_container">
                     <div class="slides">
                         <div class="slide" id="slide_1">
-                            <a href="/courses/revit/">
+                            <a href="/courses/revit/" class="hover">
                                 <h5>Revit</h5>
                             </a>
                             <img src="/assets/images/revit.svg" alt="">
                         </div>
                         <div class="slide" id="slide_2">
-                            <a href="/courses/3D'sMax/">
+                            <a href="/courses/3D'sMax/" class="hover">
                                 <div class="group_text_slide">
                                     <h5>3D’s Max</h5>
                                     <h5>Corona Render</h5>
@@ -53,75 +67,96 @@
                             <img src="/assets/images/3Ds_Max_Corona_Render.svg" alt="">
                         </div>
                         <div class="slide" id="slide_3">
-                            <a href="/courses/sketchUp/">
+                            <a href="/courses/sketchUp/" class="hover">
                                 <h5>SketchUp</h5>
                             </a>
                             <img src="/assets/images/SketchUp.svg" alt="">
                         </div>
                         <div class="slide" id="slide_4">
-                            <a href="/courses/blender/">
+                            <a href="/courses/blender/" class="hover">
                                 <h5>Blender</h5>
                             </a>
                             <img src="/assets/images/blender.svg" alt="">
                         </div>
                         <div class="slide" id="slide_5">
-                            <a href="/courses/archiCAD/">
+                            <a href="/courses/archiCAD/" class="hover">
                                 <h5>ArchiCAD</h5>
                             </a>
                             <img src="/assets/images/archiCAD.svg" alt="">
                         </div>
                     </div>
                 </div>
-                <button class="button_slide" id="nextBtn">❯</button>
+                <button class="button_slide" id="nextBtn">
+                    <img src="/assets/images/arrow.svg" alt="">
+                </button>
             </div>
         </div>
-        <div class="block_3">
+        <div class="block_3" id="section3">
             <h4>Наша команда</h4>
             <div class="slider_2">
-                <button class="button_slide_2" id="prevBtn2">❮</button>
+                <button class="button_slide_2" id="prevBtn2">
+                    <img src="/assets/images/arrow.svg" alt="">
+                </button>
                 <div class="slider_container_2">
                     <div class="slides_2">
                         <div class="slide_2">
                             <img src="/assets/images/Rogalskaya.png" alt="">
                             <div class="team_text_slide">
-                                <h5>Рогальская Ярослава</h5>
+                                <div class="h5">
+                                    <h5>Рогальская</h5>
+                                    <h5>Ярослава</h5>
+                                </div>
                                 <p>Руководитель проекта</p>
                             </div>
                         </div>
                         <div class="slide_2">
-                            <img src="/assets/images/Rogalskaya.png" alt="">
+                            <img src="/assets/images/Gulin.png" alt="">
                             <div class="team_text_slide">
-                                <h5>Рогальская Ярослава</h5>
-                                <p>Руководитель проекта</p>
+                                <div class="h5">
+                                    <h5>Гулин</h5>
+                                    <h5>Эдуард</h5>
+                                </div>
+                                <p>Преподаватель курсов</p>
                             </div>
                         </div>
                         <div class="slide_2">
-                            <img src="/assets/images/Rogalskaya.png" alt="">
+                            <img src="/assets/images/Balakina.png" alt="">
                             <div class="team_text_slide">
-                                <h5>Рогальская Ярослава</h5>
-                                <p>Руководитель проекта</p>
+                                <div class="h5">
+                                    <h5>Балакина </h5>
+                                    <h5>Варвара</h5>
+                                </div>
+                                <p>Разработчик сайта</p>
                             </div>
                         </div>
                         <div class="slide_2">
-                            <img src="/assets/images/Rogalskaya.png" alt="">
+                            <img src="/assets/images/Sidorenko.png" alt="">
                             <div class="team_text_slide">
-                                <h5>Рогальская Ярослава</h5>
-                                <p>Руководитель проекта</p>
+                                <div class="h5">
+                                    <h5>Сидоренко</h5>
+                                    <h5>Максим</h5>
+                                </div>
+                                <p>Дизайнер сайта</p>
                             </div>
                         </div>
                         <div class="slide_2">
-                            <img src="/assets/images/Rogalskaya.png" alt="">
+                            <img src="/assets/images/Grekova.png" alt="">
                             <div class="team_text_slide">
-                                <h5>Рогальская Ярослава</h5>
-                                <p>Руководитель проекта</p>
+                                <div class="h5">
+                                    <h5>Грекова</h5>
+                                    <h5>Галина</h5>
+                                </div>
+                                <p>Контент-мейкер</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button class="button_slide_2" id="nextBtn2">❯</button>
+                <button class="button_slide_2" id="nextBtn2">
+                    <img src="/assets/images/arrow.svg" alt="">
+                </button>
             </div>
         </div>
-        <div class="block_4">
+        <div class="block_4" id="section4">
             <h4>Наши партнеры</h4>
             <div class="partners">
                 <div class="partner">
@@ -144,9 +179,12 @@
             </div>
         </div>
     </main>
+
     <footer>
         <div class="block_1_footer">
-            <img src="/assets/images/logo_header.svg" alt="">
+            <a href="/index.html">
+                <img src="/assets/images/logo_header.svg" alt="">
+            </a>
             <div class="about_platform">
                 <p>ДЕЙСТВИТЕЛЬНО УДОБНАЯ</p>
                 <p>ПЛАТФОРМА ДЛЯ ОБУЧЕНИЯ</p>
@@ -154,18 +192,26 @@
         </div>
         <div class="block_2_footer">
             <div class="about_social">
-                <p>Мы в социальных сетях</p>
                 <div class="social_media">
-                    <img src="/assets/images/vk.svg">
-                    <img src="/assets/images/tg.svg">
+                    <a href="https://m.vk.com/archivispro">
+                        <img src="/assets/images/vk.svg">
+                    </a>
+                    <a href="https://t.me/archivispro">
+                        <img src="/assets/images/tg.svg">
+                    </a>
                 </div>
+                <a href="/assets/images/Пользовательское_соглашение_архивис.pdf">
+                    <p>Пользовательское соглашение</p>
+                </a>
             </div>
-            <p>Пользовательское соглашение</p>
+            <p>Все права защищены</p>
         </div>
     </footer>
 
     <script src="/js/home/slider_1.js"></script>
-    <script src="/js/home/HP_slider_2.js"></script>
+    <script src="/js/home/slider_2.js"></script>
+    <script src="/js/log/log.js"></script>
+    <script src="/js/class.js"></script>
 </body>
 
 </html>

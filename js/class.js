@@ -190,9 +190,6 @@ class User {
 
 
 
-/**
- * Менеджер работы с курсами
- */
 class CoursesManager {
     constructor() {
         this.data = [
@@ -200,27 +197,106 @@ class CoursesManager {
                 "id": 0,
                 "name": "Revit",
                 "image": "/assets/images/revit.svg",
+                "level": "Продвинутый"
             },
             {
                 "id": 1,
                 "name": "3D's Max & Corona Render",
                 "image": "/assets/images/3Ds_Max_Corona_Render.svg",
+                "level": "Профессиональный"
             },
             {
                 "id": 2,
                 "name": "SketchUp",
                 "image": "/assets/images/SketchUp.svg",
+                "level": "Базовый"
             },
             {
                 "id": 3,
                 "name": "Blender",
                 "image": "/assets/images/blender.svg",
+                "level": "Продвинутый"
             },
             {
                 "id": 4,
                 "name": "ArchiCAD",
                 "image": "/assets/images/archiCAD.svg",
+                "level": "Профессиональный"
             },
         ];
+    }
+}
+
+
+
+/**
+ * Менеджер сертификатов
+ */
+class CertificatesManager {
+    constructor() {
+        const data = localStorage.getItem("userCertificates");
+        this.data = data ? JSON.parse(data) : [];
+    }
+
+    /**
+     * Создание сертификата
+     * @param {number} userId ID пользователя
+     * @param {number} courseId ID курса
+     * @param {string} courseName Название курса
+     * @param {string} studentName Имя студента
+     * @returns {Object}
+     */
+    createCertificate(userId, courseId, courseName, studentName) {
+        const certificate = {
+            id: this.data.length +1,
+            userId: userId,
+            courseId: courseId,
+            courseName: courseName,
+            studentName: studentName,
+            issueDate: new Date().toLocaleDateString('ru-RU'),
+            level: this.getCourseLevel(courseId)
+        };
+        
+        this.data.push(certificate);
+        this.save();
+        return certificate;
+    }
+
+
+    /**
+     * Получение уровня курса
+     * @param {number} courseId 
+     * @returns {string}
+     */
+    getCourseLevel(courseId) {
+        const coursesManager = new CoursesManager();
+        const course = coursesManager.data.find(c => c.id === courseId);
+        return course ? course.level : "Не указано";
+    }
+
+    /**
+     * Получение сертификатов пользователя
+     * @param {number} userId 
+     * @returns {Array}
+     */
+    getUserCertificates(userId) {
+        return this.data.filter(cert => cert.userId == userId);
+    }
+
+    /**
+     * Проверка наличия сертификата для курса
+     * @param {number} userId 
+     * @param {number} courseId 
+     * @returns {boolean}
+     */
+    hasCertificate(userId, courseId) {
+        return this.data.some(cert => cert.userId == userId && cert.courseId == courseId);
+    }
+
+    /**
+     * Сохранение данных
+     */
+    save() {
+        localStorage.setItem("userCertificates", JSON.stringify(this.data));
     }
 }
