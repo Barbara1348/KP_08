@@ -5,6 +5,7 @@ const authorization = document.getElementById("authorization");
 const loginForm = document.getElementById("loginForm");
 const registForm = document.getElementById("registForm");
 
+// Переключение между формами
 authorization.addEventListener("click", () => {
     authorization.classList.add("active");
     registration.classList.remove("active");
@@ -19,120 +20,95 @@ registration.addEventListener("click", () => {
     registForm.classList.add("active_");
 });
 
-//форма регистрации
-
-registForm.addEventListener("submit", (e) => {
+// Форма регистрации
+registForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    
     const username = document.getElementById("loginRegist").value.trim();
     const name = document.getElementById("name").value.trim();
     const surname = document.getElementById("surname").value.trim();
     const password = document.getElementById("passwordRegist").value;
-    const checkbox = document.getElementById("checkbox");
-
     const confirmPassword = document.getElementById("password_Regist").value;
+    const checkbox = document.getElementById("checkbox");
+    
     const errorElem = document.getElementById("loginError");
-
     const modal = document.getElementById("myModal");
-    const span = document.getElementsByClassName("close")[0];
 
-    function Modal() {
-        // Закрываем модальное окно при клике на крестик
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-
-        // Закрываем модальное окно при клике вне его области
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    }
-
+    // Валидация
     if (password !== confirmPassword) {
-        errorElem.innerText = "Неверное имя пользователя или пароль!";
-        modal.style.display = "block";
-        Modal();
+        showModal("Пароли не совпадают!");
         return;
     }
 
     if (!checkbox.checked) {
-        errorElem.innerText = "Примите соглашение!";
-        modal.style.display = "block";
-        Modal();
+        showModal("Примите пользовательское соглашение!");
         return;
     }
 
-    if (userManager.data.find(user => user.username === username)) {
-        errorElem.innerText = "Такое имя пользователя уже занято!";
-        modal.style.display = "block";
-        Modal();
+    if (password.length < 6) {
+        showModal("Пароль должен содержать минимум 6 символов!");
         return;
     }
 
-    else {
-        errorElem.innerText = "Вы успешно авторизовались!";
-        modal.style.display = "block";
-        Modal();
+    try {
+        // Регистрация через API
+        await userManager.add(surname, name, username, password);
+        
+        showModal("Регистрация успешна! Перенаправление...");
+        
+        setTimeout(() => {
+            window.location.href = "/profile/";
+        }, 1500);
+        
+    } catch (error) {
+        showModal(error.message || "Ошибка при регистрации");
     }
-
-    setTimeout(() => {
-        let data = userManager.add(
-            surname,
-            name,
-            username,
-            password,
-        );
-        userManager.setCurrentUser(data.id);
-        window.location.href = "/profile/";
-    }, 1500)
 });
 
-//далее авторизация
-
-loginForm.addEventListener("submit", (e) => {
+// Форма авторизации
+loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const username = document.getElementById("loginAuth").value.trim();
     const password = document.getElementById("passwordLogin").value;
-    const errorElem = document.getElementById("loginError");
 
-    const foundUser = userManager.data.find(user => user.username === username && user.password === password);
+    try {
+        // Авторизация через API
+        await userManager.setCurrentUser(username, password);
+        
+        showModal("Авторизация успешна! Перенаправление...");
+        
+        setTimeout(() => {
+            window.location.href = "/profile/";
+        }, 1500);
+        
+    } catch (error) {
+        showModal(error.message || "Неверное имя пользователя или пароль!");
+    }
+});
 
-    // Получаем элементы
+// Функция показа модального окна (добавьте если ее нет)
+function showModal(message) {
     const modal = document.getElementById("myModal");
-    const span = document.getElementsByClassName("close")[0];
-
-    function Modal() {
-        // Закрываем модальное окно при клике на крестик
-        span.onclick = function () {
-            modal.style.display = "none";
+    const errorText = document.getElementById("loginError");
+    
+    if (modal && errorText) {
+        errorText.textContent = message;
+        modal.style.display = "block";
+        
+        const closeBtn = modal.querySelector(".close");
+        if (closeBtn) {
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
+            }
         }
-
-        // Закрываем модальное окно при клике вне его области
-        window.onclick = function (event) {
+        
+        window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
+    } else {
+        alert(message);
     }
-
-    if (!foundUser) {
-        // Открываем модальное окно при клике на кнопку
-        errorElem.innerText = "Неверное имя пользователя или пароль!";
-        modal.style.display = "block";
-        Modal();
-        return;
-    }
-
-    else {
-        errorElem.innerText = "Вы успешно авторизовались!";
-        modal.style.display = "block";
-        Modal();
-    }
-
-    setTimeout(() => {
-        userManager.setCurrentUser(foundUser.id);
-        window.location.href = "/profile/";
-    }, 1500);
-});
+}

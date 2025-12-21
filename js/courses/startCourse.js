@@ -1,44 +1,49 @@
 /**
- * Добавление курса пользователю
- * @param {number} id курса для добавления
+ * Добавление курса пользователю (работает с БД)
  */
-function startCourse(id) {
-    let usersManager = new UsersManager();
-    let certificatesManager = new CertificatesManager();
-    let coursesManager = new CoursesManager();
-
-    const stateUser = usersManager.readCurrentUser();
-    
-    if (!stateUser) {
-        showModalError("Пользователь не авторизован");
-        return;
-    }
-    
-    let user = new User(stateUser);
-    const stateCourse = user.checkCourse(id);
-
-    if (!stateCourse) {
-        user.addCourse(id);
-        usersManager.edit(user.id, user);
-        usersManager.save();
-        
-        // Создаем сертификат при добавлении курса
-        const course = coursesManager.data.find(c => c.id === id);
-        if (course) {
-            certificatesManager.createCertificate(
-                user.id, 
-                course.id, 
-                course.name, 
-                `${user.surname} ${user.name}`
-            );
+async function startCourse(courseId) {
+    try {
+        // Проверяем авторизацию
+        const userJson = localStorage.getItem('currentUser');
+        if (!userJson) {
+            alert("Пожалуйста, войдите в систему");
+            setTimeout(() => {
+                window.location.href = "/log/";
+            }, 1000);
+            return;
         }
+        
+        const currentUser = JSON.parse(userJson);
+        const coursesManager = new CoursesManager();
+        
+        // Проверяем, не записан ли уже на курс
+        const enrollment = await coursesManager.checkUserEnrollment(currentUser.id, courseId);
+        
+        if (enrollment.isEnrolled) {
+            alert("Вы уже записаны на этот курс");
+            setTimeout(() => {
+                window.location.href = "/profile/";
+            }, 1500);
+            return;
+        }
+        
+        // Добавляем курс через API
+        await coursesManager.addCourseToUser(currentUser.id, courseId);
+        
+        alert("Курс успешно добавлен! Сертификат создан.");
+        
+        setTimeout(() => {
+            window.location.href = "/profile/";
+        }, 1500);
+        
+    } catch (error) {
+        console.error('Ошибка:', error);
+        alert("Ошибка при добавлении курса: " + error.message);
     }
-    window.location.href = "/profile/";
 }
 
 /**
- * Показать ошибку в модальном окне
- * @param {string} message Сообщение об ошибке
+ * Показать модальное окно
  */
 function showModalError(message) {
     const modal = document.getElementById("myModal");
@@ -48,7 +53,6 @@ function showModalError(message) {
         errorText.textContent = message;
         modal.style.display = "block";
         
-        // Добавляем обработчик для закрытия модального окна
         const closeBtn = modal.querySelector(".close");
         if (closeBtn) {
             closeBtn.onclick = function() {
@@ -56,24 +60,12 @@ function showModalError(message) {
             }
         }
         
-        // Закрытие модального окна при клике вне его
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
     } else {
-        // Если модальное окно не найдено, показываем alert
         alert(message);
-    }
-}
-
-/**
- * Закрыть модальное окно
- */
-function closeModal() {
-    const modal = document.getElementById("myModal");
-    if (modal) {
-        modal.style.display = "none";
     }
 }
