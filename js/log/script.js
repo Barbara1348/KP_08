@@ -52,9 +52,10 @@ registForm.addEventListener("submit", async (e) => {
 
     try {
         // Регистрация через API
+        const userManager = new UsersManager();
         await userManager.add(surname, name, username, password);
         
-        showModal("Регистрация успешна! Перенаправление...");
+        showModal("Регистрация успешна! Перенаправление в профиль...");
         
         setTimeout(() => {
             window.location.href = "/profile/";
@@ -74,20 +75,33 @@ loginForm.addEventListener("submit", async (e) => {
 
     try {
         // Авторизация через API
+        const userManager = new UsersManager();
         await userManager.setCurrentUser(username, password);
         
-        showModal("Авторизация успешна! Перенаправление...");
+        // Получаем текущего пользователя
+        const currentUser = userManager.getCurrentUser();
+        console.log('Авторизован пользователь:', currentUser);
         
-        setTimeout(() => {
-            window.location.href = "/profile/";
-        }, 1500);
+        // Проверяем роль и перенаправляем
+        if (currentUser && currentUser.role === 'admin') {
+            showModal("Авторизация успешна! Переход в админ панель...");
+            setTimeout(() => {
+                window.location.href = "/admin/";
+            }, 1500);
+        } else {
+            showModal("Авторизация успешна! Переход в профиль...");
+            setTimeout(() => {
+                window.location.href = "/profile/";
+            }, 1500);
+        }
         
     } catch (error) {
+        console.error('Ошибка авторизации:', error);
         showModal(error.message || "Неверное имя пользователя или пароль!");
     }
 });
 
-// Функция показа модального окна (добавьте если ее нет)
+// Функция показа модального окна
 function showModal(message) {
     const modal = document.getElementById("myModal");
     const errorText = document.getElementById("loginError");
@@ -96,6 +110,7 @@ function showModal(message) {
         errorText.textContent = message;
         modal.style.display = "block";
         
+        // Добавляем обработчик для закрытия
         const closeBtn = modal.querySelector(".close");
         if (closeBtn) {
             closeBtn.onclick = function() {
@@ -103,6 +118,7 @@ function showModal(message) {
             }
         }
         
+        // Закрытие при клике вне окна
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";

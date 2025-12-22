@@ -3,10 +3,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log('Админ панель загружается...');
     
     // Проверяем права администратора
-    await checkAdminAuth();
+    const userManager = new UsersManager();
+    
+    if (!userManager.isAuthenticated()) {
+        window.location.href = "/log/";
+        return;
+    }
+    
+    if (!userManager.isAdmin()) {
+        window.location.href = "/profile/";
+        return;
+    }
     
     // Загружаем данные
     await loadAdminData();
+    await loadStats();
     await loadUsers();
     
     // Настраиваем поиск
@@ -25,7 +36,45 @@ async function loadAdminData() {
         adminInfo.innerHTML = `
             <p><strong>Администратор:</strong> ${currentUser.surname} ${currentUser.name}</p>
             <p><strong>Логин:</strong> ${currentUser.username}</p>
-            <p><strong>Роль:</strong> ${currentUser.role}</p>
+        `;
+    }
+}
+
+/**
+ * Загрузка статистики
+ */
+async function loadStats() {
+    const userManager = new UsersManager();
+    
+    try {
+        const stats = await userManager.getStats();
+        
+        const statsCards = document.getElementById('statsCards');
+        statsCards.innerHTML = `
+            <div class="stat-card">
+                <h3>${stats.totalUsers}</h3>
+                <p>Пользователей</p>
+            </div>
+            <div class="stat-card">
+                <h3>${stats.totalCourses}</h3>
+                <p>Курсов</p>
+            </div>
+            <div class="stat-card">
+                <h3>${stats.totalCertificates}</h3>
+                <p>Сертификатов</p>
+            </div>
+            <div class="stat-card">
+                <h3>${stats.popularCourses[0] ? stats.popularCourses[0].student_count : 0}</h3>
+                <p>Самый популярный курс</p>
+            </div>
+        `;
+        
+    } catch (error) {
+        console.error('Ошибка загрузки статистики:', error);
+        document.getElementById('statsCards').innerHTML = `
+            <div class="error">
+                <p>Ошибка загрузки статистики</p>
+            </div>
         `;
     }
 }
@@ -38,7 +87,6 @@ async function loadUsers() {
     
     try {
         const users = await userManager.getAllUsers();
-        console.log('Получены пользователи:', users);
         
         const tableBody = document.getElementById('usersTableBody');
         tableBody.innerHTML = '';
@@ -79,10 +127,7 @@ async function loadUsers() {
         console.error('Ошибка загрузки пользователей:', error);
         document.getElementById('usersTableBody').innerHTML = `
             <tr>
-                <td colspan="7" class="error">
-                    <p>Ошибка загрузки пользователей</p>
-                    <p>${error.message}</p>
-                </td>
+                <td colspan="7" class="error">Ошибка загрузки пользователей</td>
             </tr>
         `;
     }
@@ -97,7 +142,7 @@ async function showUserCourses(userId) {
         const courses = await response.json();
         
         let coursesHtml = '';
-        if (courses && courses.length > 0) {
+        if (courses.length > 0) {
             courses.forEach(course => {
                 const enrolledDate = course.UserCourse ? 
                     new Date(course.UserCourse.enrolled_date).toLocaleDateString('ru-RU') : 
@@ -158,8 +203,6 @@ async function refreshUsers() {
  */
 function setupSearch() {
     const searchInput = document.getElementById('searchUsers');
-    if (!searchInput) return;
-    
     searchInput.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase();
         const rows = document.querySelectorAll('#usersTableBody tr');
@@ -187,27 +230,8 @@ function showModal(title, content) {
     const modal = document.getElementById('myModal');
     const modalMessage = document.getElementById('modalMessage');
     
-    if (modal && modalMessage) {
-        modalMessage.innerHTML = `<h3>${title}</h3>${content}`;
-        modal.style.display = 'block';
-        
-        // Добавляем обработчик закрытия
-        const closeBtn = modal.querySelector(".close");
-        if (closeBtn) {
-            closeBtn.onclick = function() {
-                modal.style.display = "none";
-            }
-        }
-        
-        // Закрытие при клике вне окна
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    } else {
-        alert(`${title}\n\n${content}`);
-    }
+    modalMessage.innerHTML = `<h3>${title}</h3>${content}`;
+    modal.style.display = 'block';
 }
 
 /**
@@ -215,7 +239,5 @@ function showModal(title, content) {
  */
 function closeModal() {
     const modal = document.getElementById('myModal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
+    modal.style.display = 'none';
 }
