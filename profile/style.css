@@ -1,3 +1,4 @@
+/* Стили для профиля */
 .switch {
     display: flex;
     flex-direction: column;
@@ -17,6 +18,16 @@
     border: none;
     color: white;
     padding: 1vw;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.switch button:hover {
+    background-image: linear-gradient(120deg, #4A11C7 18%, #9315D3 82%, #D416E8 100%);
+}
+
+.switch button.active {
+    background-image: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
 }
 
 main {
@@ -26,19 +37,8 @@ main {
     gap: 3vw;
 }
 
-.active {
-    background-image: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
-}
-
 #infoUser, #myCourses, #mySertificates, #logOut {
     padding: 1vw;
-}
-
-#formProfile.active__ {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    position: relative;
 }
 
 .container {
@@ -83,7 +83,7 @@ main {
 }
 
 .slide img {
-    max-width: 70%;
+    max-width: 50%;
 }
 
 #courses.active_, #sertificates.active_, #logOut.active_, #info.active_ {
@@ -165,128 +165,366 @@ h5 {
     gap: 2vw;
     padding: 2vw;
     width: 100%;
-}
-
-.certificate {
-    background: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
-    width: 595px;
-    height: 842px;
-    border: 2px solid #3A00B7;
-    border-radius: 15px;
-    padding: 3vw;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-    page-break-inside: avoid; /* Для корректного отображения в PDF */
-    display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
+.user-name {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 600;
+    color: white;
+    font-family: "Mazzard";
+    font-size: 1.2vw;
+}
+
+/* Стили для сертификатов */
+.certificates-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    padding: 2vw;
+    width: 100%;
+    align-items: center;
+}
+
+/* Карточка сертификата */
+.certificate-card {
+    background: linear-gradient(140deg, #1a1a1a 0%, #2a2a2a 100%);
+    border-radius: 1.5vw;
+    padding: 2.5vw;
+    width: 100%;
+    max-width: 800px;
+    border: 1px solid #3d3d3d;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.certificate-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(58, 0, 183, 0.2);
+}
+
+.course-level {
+    color: white;
+    font-size: 0.9vw;
+    font-family: "Mazzard", sans-serif;
+
+}
+
+.certificate-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3A00B7, #8301C3, #CC02CE);
+}
+
+/* Заголовок сертификата */
 .certificate-header {
+    text-align: center;
+    margin-bottom: 2vw;
+    padding-bottom: 1.5vw;
+    border-bottom: 1px solid #3d3d3d;
+}
+
+.certificate-header h3 {
+    color: white;
+    font-family: "Mazzard", sans-serif;
+    font-size: 1.8vw;
+    font-weight: 600;
+    margin-bottom: 0.5vw;
+    background: linear-gradient(90deg, #3A00B7, #CC02CE);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.certificate-number {
+    color: #888;
+    font-family: "Mazzard", sans-serif;
+    font-size: 1vw;
+    letter-spacing: 1px;
+}
+
+/* Тело сертификата */
+.certificate-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2vw;
     margin-bottom: 2vw;
 }
 
-.certificate-title {
-    font-size: 3vw;
+.certificate-body p {
+    color: #ccc;
+    font-family: "Mazzard", sans-serif;
+    font-size: 1.2vw;
+    line-height: 1.5;
+}
+
+.certificate-body span {
+    color: #888;
+    margin-right: 0.5vw;
+}
+
+.certificate-body strong {
     color: white;
-    font-family: "Mazzard";
     font-weight: 600;
-    margin-bottom: 1vw;
+    background: linear-gradient(90deg, #3A00B7, #CC02CE);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.certificate-subtitle {
+/* Кнопка скачивания */
+.download-btn {
+    font-family: "Mazzard", sans-serif;
+    font-size: 1.25vw;
+    padding: 1vw 2vw;
+    border-radius: 0.5vw;
+    border: none;
+    background: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(58, 0, 183, 0.4);
+}
+
+.download-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent);
+    transition: left 0.7s ease;
+    z-index: -1;
+}
+
+.download-btn:hover::before {
+    left: 100%;
+}
+
+/* Состояние загрузки */
+.loading {
+    text-align: center;
+    color: #ccc;
+    font-family: "Mazzard", sans-serif;
     font-size: 1.5vw;
-    color: white;
-    font-family: "Mazzard";
-}
-
-.certificate-body {
-    margin: 2vw 0;
-}
-
-.certificate-text {
-    font-size: 1.3vw;
-    color: #a4a4a4;
-    font-family: "Mazzard";
-    margin: 1vw 0;
-    line-height: 1.6;
-}
-
-.certificate-student-name {
-    font-size: 2.5vw;
-    color: white;
-    font-family: "Mazzard";
-    margin: 1.5vw 0;
-    text-decoration: underline;
-}
-
-.certificate-course-name {
-    font-size: 1.8vw;
-    color: white;
-    font-family: "Mazzard";
-    margin: 1.5vw 0;
-}
-
-.certificate-footer {
-    margin-top: 2vw;
+    padding: 4vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1vw;
-    margin: 0 auto;
+    justify-content: center;
 }
 
-.certificate-date {
-    font-size: 1.1vw;
-    color: #a4a4a4;
-    font-family: "Mazzard";
-    display: flex;
-    align-items: center;
-    gap: 1vw;
-    justify-content: center;
-    margin: 0 auto;
-    img {
-        max-width: 20%;
+/* Спиннер загрузки */
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-left-color: #3A00B7;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
     }
 }
 
-.certificate-actions {
-    margin-top: 1vw;
-    text-align: center;
+.loading p {
+    color: #ccc;
+    font-size: 1.2vw;
 }
 
-.download-certificate-btn {
-    font-family: "Mazzard";
-    font-size: 1.1vw;
-    padding: 0.8vw 1.5vw;
-    border-radius: 0.5vw;
-    border: none;
-    color: #3A00B7;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.download-certificate-btn:hover {
-    transform: translateY(-2px);
-}
-
+/* Нет сертификатов */
 .no-certificates {
     text-align: center;
+    padding: 4vw;
+    background: linear-gradient(140deg, #1a1a1a 0%, #2a2a2a 100%);
+    border-radius: 1.5vw;
+    border: 1px solid #3d3d3d;
+    width: 100%;
+    max-width: 800px;
+}
+
+.no-certificates h5 {
     color: white;
-    font-family: "Mazzard";
-    font-size: 1.8vw;
-    padding: 2vw;
+    font-family: "Mazzard", sans-serif;
+    font-size: 2vw;
+    margin-bottom: 1vw;
+    background: linear-gradient(90deg, #3A00B7, #CC02CE);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-/* Стили для PDF версии */
-.certificate-pdf {
-    border-radius: 0px;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.no-certificates p {
+    color: #888;
+    font-family: "Mazzard", sans-serif;
+    font-size: 1.2vw;
+    margin-bottom: 2vw;
 }
 
+/* Ошибка */
+.error {
+    text-align: center;
+    padding: 4vw;
+    background: linear-gradient(140deg, #2a1a1a 0%, #3a2a2a 100%);
+    border-radius: 1.5vw;
+    border: 1px solid #5d3d3d;
+    width: 100%;
+    max-width: 800px;
+}
+
+.error h5 {
+    color: #ff6b6b;
+    font-family: "Mazzard", sans-serif;
+    font-size: 2vw;
+    margin-bottom: 1vw;
+}
+
+.error p {
+    color: #ff9999;
+    font-family: "Mazzard", sans-serif;
+    font-size: 1.2vw;
+    margin-bottom: 2vw;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .switch {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .switch button {
+        width: 100%;
+        font-size: 4vw;
+        padding: 3vw;
+        border-radius: 2vw;
+    }
+    
+    main {
+        flex-direction: column;
+        padding: 4% 5%;
+        gap: 5vw;
+    }
+    
+    .certificate-card {
+        padding: 6vw;
+        border-radius: 4vw;
+        margin: 2vw 0;
+    }
+    
+    .certificate-header h3 {
+        font-size: 4.5vw;
+    }
+    
+    .certificate-number {
+        font-size: 3vw;
+    }
+    
+    .certificate-body p {
+        font-size: 3.5vw;
+    }
+    
+    .download-btn {
+        font-size: 3.5vw;
+        padding: 3vw 5vw;
+        border-radius: 2vw;
+    }
+    
+    .loading {
+        font-size: 4vw;
+        padding: 8vw;
+    }
+    
+    .spinner {
+        width: 60px;
+        height: 60px;
+        border-width: 6px;
+    }
+    
+    .no-certificates {
+        padding: 8vw;
+        border-radius: 4vw;
+    }
+    
+    .no-certificates h5 {
+        font-size: 5vw;
+    }
+    
+    .no-certificates p {
+        font-size: 3.5vw;
+    }
+    
+    .error {
+        padding: 8vw;
+        border-radius: 4vw;
+    }
+    
+    .error h5 {
+        font-size: 5vw;
+    }
+    
+    .error p {
+        font-size: 3.5vw;
+    }
+    
+    .user-name {
+        font-size: 3.5vw;
+    }
+    
+    input {
+        font-size: 3.5vw;
+        padding: 3vw;
+        border-radius: 2vw;
+    }
+    
+    form {
+        width: 100%;
+        gap: 3vw;
+    }
+    
+    #editBtn {
+        font-size: 3.5vw;
+        padding: 3vw;
+        border-radius: 2vw;
+    }
+    
+    .profile img {
+        width: 60%;
+        margin-left: 0;
+    }
+    
+    .slide {
+        height: 40vw;
+        width: 40vw;
+        border-radius: 3vw;
+        padding: 4vw 0;
+    }
+    
+    .container {
+        padding: 5vw;
+        flex-direction: column;
+    }
+}

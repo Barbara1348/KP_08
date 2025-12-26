@@ -1,46 +1,250 @@
-.admin-header {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+/* Основные стили админ-панели */
+.admin-main {
+    padding: 6% 8%;
+    display: flex;
+    justify-content: space-between;
+    gap: 2vw;
+}
+
+.admin-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 25%;
+    gap: 0.5vw;
+}
+
+h6 {
     color: white;
-    padding: 2rem;
-    border-radius: 10px;
-    margin: 2rem auto;
-    max-width: 1200px;
+    font-size: 2vw;
+    letter-spacing: 1.5px;
+    font-family: "Mazzard";
+    font-weight: 300;
+    display: flex;
+    align-self: center;
+}
+
+.admin-sidebar button {
+    font-family: "Mazzard";
+    font-size: 1.4vw;
+    border-radius: 0.5vw;
+    background-color: transparent;
+    width: 15vw;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border: none;
+    color: white;
+    padding: 1vw;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.admin-sidebar button:hover {
+    background-image: linear-gradient(120deg, #4A11C7 18%, #9315D3 82%, #D416E8 100%);
+}
+
+.admin-sidebar button.active {
+    background-image: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+}
+
+.admin-content {
+    background-color: #3d3d3d;
+    width: 80%;
+    border-radius: 2vw;
+    padding: 3vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+}
+
+.admin-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    margin-bottom: 2vw;
+}
+
+.admin-header h1 {
+    color: white;
+    font-family: "Mazzard";
+    font-size: 2.5vw;
+    margin: 0;
+    text-align: center;
 }
 
 .admin-info {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 1rem;
-    border-radius: 5px;
-    margin-top: 1rem;
+    background: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+    padding: 1.5vw;
+    border-radius: 1vw;
+    text-align: center;
+}
+
+.admin-info p {
+    color: white;
+    font-family: "Mazzard";
+    font-size: 1.2vw;
+    margin: 0;
 }
 
 .admin-section {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    background: #2d2d2d;
+    border-radius: 1.5vw;
+    padding: 2vw;
+    display: none;
+    flex-direction: column;
+    gap: 1.5vw;
 }
 
-.admin-section h2 {
-    color: #2c3e50;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
+.admin-section.active-section {
+    display: flex;
+    animation: fadeIn 0.5s ease;
 }
 
-.stats-cards {
+.users-controls {
+    display: flex;
+    gap: 1vw;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.users-controls input {
+    font-family: "Mazzard";
+    font-size: 1.1vw;
+    padding: 1vw;
+    border-radius: 0.5vw;
+    border: none;
+    background: #3d3d3d;
+    color: white;
+    flex: 1;
+}
+
+.users-controls input::placeholder {
+    color: #888;
+}
+
+.users-controls button {
+    font-family: "Mazzard";
+    font-size: 1.1vw;
+    padding: 1vw 2vw;
+    border-radius: 0.5vw;
+    border: none;
+    background-image: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.users-controls button:hover {
+    background-image: linear-gradient(120deg, #4A11C7 18%, #9315D3 82%, #D416E8 100%);
+    transform: translateY(-2px);
+}
+
+.users-table-container {
+    overflow-x: auto;
+    border-radius: 1vw;
+    background: #2d2d2d;
+}
+
+.users-table {
+    border-collapse: collapse;
+}
+
+.users-table thead {
+    background: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+}
+
+.users-table th {
+    padding: 1.2vw;
+    text-align: left;
+    font-family: "Mazzard";
+    font-weight: 600;
+    color: white;
+    font-size: 1.1vw;
+}
+
+.users-table td {
+    padding: 1.2vw;
+    border-bottom: 1px solid #444;
+    font-family: "Mazzard";
+    color: #ccc;
+    font-size: 1vw;
+    vertical-align: middle;
+}
+
+.users-table tbody tr:hover {
+    background: #3a3a3a;
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 0.5vw 1vw;
+    border-radius: 0.5vw;
+    font-family: "Mazzard";
+    font-size: 0.9vw;
+    font-weight: 500;
+}
+
+.role-badge.admin {
+    background: #8301C3;
+    color: white;
+}
+
+.role-badge.user {
+    background: #D416E8;
+    color: white;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5vw;
+}
+
+.action-btn {
+    padding: 0.6vw 1vw;
+    border: none;
+    border-radius: 0.5vw;
+    font-family: "Mazzard";
+    font-size: 0.9vw;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-btn.view {
+    background: #3A00B7;
+    color: white;
+}
+
+.action-btn.delete {
+    background-color: #8301C3;
+    color: white;
+}
+
+.action-btn.details {
+    background: linear-gradient(120deg, #9C27B0 18%, #7B1FA2 82%, #4A148C 100%);
+    color: white;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Стили для статистики */
+.stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    gap: 2vw;
+    margin-top: 2vw;
 }
 
 .stat-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #3d3d3d 0%, #4a4a4a 100%);
+    border-radius: 1.5vw;
+    padding: 2vw;
     text-align: center;
-    transition: transform 0.3s;
+    border: 1px solid #3A00B7;
+    transition: transform 0.3s ease;
 }
 
 .stat-card:hover {
@@ -48,157 +252,304 @@
 }
 
 .stat-card h3 {
-    font-size: 2rem;
-    color: #3498db;
-    margin: 0 0 0.5rem 0;
+    color: white;
+    font-family: "Mazzard";
+    font-size: 3vw;
+    margin: 0 0 1vw 0;
+    background: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .stat-card p {
-    color: #7f8c8d;
+    color: #ccc;
+    font-family: "Mazzard";
+    font-size: 1.2vw;
     margin: 0;
 }
 
-.users-controls {
+/* Стили для управления курсами */
+.courses-controls {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 1vw;
+    margin-bottom: 2vw;
 }
 
-.users-controls input {
-    flex: 1;
-    padding: 0.75rem;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.users-controls button {
-    padding: 0.75rem 1.5rem;
-    background: #3498db;
-    color: white;
+.courses-controls button {
+    font-family: "Mazzard";
+    font-size: 1.1vw;
+    padding: 1vw 2vw;
+    border-radius: 0.5vw;
     border: none;
-    border-radius: 5px;
+    background-image: linear-gradient(120deg, #3A00B7 18%, #8301C3 82%, #CC02CE 100%);
+    color: white;
     cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
 }
 
-.users-controls button:hover {
-    background: #2980b9;
+.courses-controls button:hover {
+    background-image: linear-gradient(120deg, #4A11C7 18%, #9315D3 82%, #D416E8 100%);
+    transform: translateY(-2px);
 }
 
-.users-table-container {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+.courses-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2vw;
+    margin-top: 2vw;
 }
 
-.users-table {
+.course-card {
+    background: linear-gradient(135deg, #3d3d3d 0%, #4a4a4a 100%);
+    border-radius: 1.5vw;
+    padding: 2vw;
+    border: 1px solid #3A00B7;
+}
+
+.course-card h4 {
+    color: white;
+    font-family: "Mazzard";
+    font-size: 1.5vw;
+    margin: 0 0 1vw 0;
+}
+
+.course-card p {
+    color: #ccc;
+    font-family: "Mazzard";
+    font-size: 1.1vw;
+    margin: 0.5vw 0;
+}
+
+/* Стили для детальной статистики */
+.detailed-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    margin-top: 2vw;
+}
+
+.stat-item {
+    background: linear-gradient(135deg, #3d3d3d 0%, #4a4a4a 100%);
+    border-radius: 1.5vw;
+    padding: 2vw;
+    border: 1px solid #3A00B7;
+}
+
+.stat-item h4 {
+    color: white;
+    font-family: "Mazzard";
+    font-size: 1.5vw;
+    margin: 0 0 1vw 0;
+}
+
+.stat-item p {
+    color: #ccc;
+    font-family: "Mazzard";
+    font-size: 1.1vw;
+    margin: 0.5vw 0;
+}
+
+/* Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
     width: 100%;
-    border-collapse: collapse;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
-.users-table th {
-    background: #2c3e50;
-    color: white;
-    padding: 1rem;
-    text-align: left;
+.modal_content {
+    background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 100%);
+    margin: 10% auto;
+    padding: 3vw;
+    border-radius: 2vw;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    border: 2px solid #3A00B7;
 }
 
-.users-table td {
-    padding: 1rem;
-    border-bottom: 1px solid #eee;
-}
-
-.users-table tr:hover {
-    background: #f5f5f5;
-}
-
-.role-badge {
-    display: inline-block;
-    padding: 0.25rem 0.5rem;
-    border-radius: 20px;
-    font-size: 0.875rem;
-    font-weight: 600;
-}
-
-.role-badge.admin {
-    background: #e74c3c;
-    color: white;
-}
-
-.role-badge.user {
-    background: #3498db;
-    color: white;
-}
-
-.courses-count {
-    background: #2ecc71;
-    color: white;
-    padding: 0.25rem 0.5rem;
-    border-radius: 20px;
-    font-size: 0.875rem;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.action-btn {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
+.close {
+    position: absolute;
+    right: 1.5vw;
+    top: 1.5vw;
+    font-size: 2vw;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 0.875rem;
-    transition: opacity 0.3s;
-}
-
-.action-btn:hover {
-    opacity: 0.8;
-}
-
-.action-btn.view {
-    background: #3498db;
     color: white;
+    transition: color 0.3s ease;
 }
 
-.action-btn.delete {
-    background: #e74c3c;
+.close:hover {
+    color: #ff6b6b;
+}
+
+#modalMessage {
     color: white;
+    font-family: "Mazzard";
+    font-size: 1.2vw;
+    text-align: center;
 }
 
-.user-details-modal {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    max-width: 500px;
-    margin: 2rem auto;
-}
-
-.user-courses {
-    margin-top: 1rem;
-}
-
-.course-item {
-    background: #f8f9fa;
-    padding: 0.75rem;
-    margin: 0.5rem 0;
-    border-radius: 5px;
-    border-left: 4px solid #3498db;
-}
-
+/* Загрузка и ошибки */
 .loading {
     text-align: center;
-    padding: 2rem;
-    color: #7f8c8d;
+    color: white;
+    font-family: "Mazzard";
+    font-size: 1.5vw;
+    padding: 4vw;
 }
 
 .error {
     text-align: center;
-    padding: 2rem;
-    color: #e74c3c;
-    background: #fdf2f2;
-    border-radius: 5px;
+    color: #ff6b6b;
+    font-family: "Mazzard";
+    font-size: 1.2vw;
+    padding: 2vw;
+    background: rgba(255, 107, 107, 0.1);
+    border-radius: 1vw;
+    margin: 2vw;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .admin-main {
+        flex-direction: column;
+        gap: 4vw;
+    }
+
+    .admin-sidebar {
+        max-width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .admin-sidebar button {
+        width: auto;
+        min-width: 15vw;
+        font-size: 1.6vw;
+    }
+
+    .admin-header h1 {
+        font-size: 3vw;
+    }
+
+    .admin-info p {
+        font-size: 1.4vw;
+    }
+
+    .admin-section h2 {
+        font-size: 2vw;
+    }
+
+    .users-table th,
+    .users-table td {
+        padding: 1vw;
+        font-size: 1.2vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-main {
+        padding: 8% 5%;
+    }
+
+    .admin-sidebar button {
+        font-size: 2vw;
+        padding: 1.5vw 2vw;
+        min-width: 20vw;
+    }
+
+    .admin-header h1 {
+        font-size: 4vw;
+    }
+
+    .admin-info p {
+        font-size: 1.8vw;
+    }
+
+    .admin-section h2 {
+        font-size: 2.5vw;
+    }
+
+    .users-controls {
+        flex-direction: column;
+        gap: 2vw;
+    }
+
+    .users-controls input,
+    .users-controls button {
+        width: 100%;
+        font-size: 1.6vw;
+    }
+
+    .users-table {
+        min-width: 600px;
+    }
+
+    .users-table th,
+    .users-table td {
+        font-size: 1.4vw;
+    }
+
+    .role-badge,
+    .action-btn {
+        font-size: 1.2vw;
+    }
+
+    #modalMessage {
+        font-size: 1.6vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-sidebar button {
+        font-size: 3vw;
+        min-width: 25vw;
+    }
+
+    .admin-header h1 {
+        font-size: 5vw;
+    }
+
+    .admin-info p {
+        font-size: 2.5vw;
+    }
+
+    .admin-section h2 {
+        font-size: 3.5vw;
+    }
+
+    .users-controls input,
+    .users-controls button {
+        font-size: 2.5vw;
+        padding: 1.5vw;
+    }
+
+    .modal_content {
+        padding: 5vw;
+        margin: 15% auto;
+    }
+
+    #modalMessage {
+        font-size: 2vw;
+    }
 }

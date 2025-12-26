@@ -66,6 +66,13 @@ class UsersManager {
   }
 
   /**
+   * Получение текущего пользователя из localStorage (алиас для обратной совместимости)
+   */
+  readCurrentUser() {
+    return this.getCurrentUser();
+  }
+
+  /**
    * Проверка, является ли пользователь администратором
    */
   isAdmin() {

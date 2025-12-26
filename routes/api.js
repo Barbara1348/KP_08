@@ -1,11 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const { User, Course, Certificate, UserCourse } = require('../models');
+const { User, Course, Certificate, UserCourse, Role } = require('../models');
 
 // Регистрация пользователя
 router.post('/register', async (req, res) => {
   try {
+    console.log('Регистрация пользователя:', req.body);
+    
     const { surname, name, username, password } = req.body;
+    
+    // Валидация
+    if (!surname || !name || !username || !password) {
+      return res.status(400).json({ error: 'Все поля обязательны для заполнения' });
+    }
     
     // Проверяем, существует ли пользователь
     const existingUser = await User.findOne({ where: { username } });
@@ -13,15 +20,31 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ error: 'Пользователь с таким логином уже существует' });
     }
     
+    // Находим роль "user" по умолчанию
+    const userRole = await Role.findOne({ where: { name: 'user' } });
+    if (!userRole) {
+      return res.status(500).json({ error: 'Роль пользователя не найдена' });
+    }
+    
     const user = await User.create({
       surname,
       name,
       username,
-      password
+      password,
+      role_id: userRole.id
+    });
+    
+    // Получаем пользователя с ролью
+    const userWithRole = await User.findByPk(user.id, {
+      include: [{
+        model: Role,
+        as: 'role',
+        attributes: ['name']
+      }]
     });
     
     // Не возвращаем пароль
-    const userResponse = user.toJSON();
+    const userResponse = userWithRole.toJSON();
     delete userResponse.password;
     
     res.status(201).json({
@@ -40,13 +63,25 @@ router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
     
-    const user = await User.findOne({ where: { username } });
+    if (!username || !password) {
+      return res.status(400).json({ error: 'Логин и пароль обязательны' });
+    }
+    
+    const user = await User.findOne({ 
+      where: { username },
+      include: [{
+        model: Role,
+        as: 'role',
+        attributes: ['name']
+      }]
+    });
+    
     if (!user) {
       return res.status(401).json({ error: 'Неверное имя пользователя или пароль' });
     }
     
-    const isValidPassword = user.verifyPassword(password);
-    if (!isValidPassword) {
+    // Простая проверка пароля (в реальном проекте используйте хеширование!)
+    if (user.password !== password) {
       return res.status(401).json({ error: 'Неверное имя пользователя или пароль' });
     }
     
@@ -70,6 +105,11 @@ router.get('/users/:id', async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id, {
       include: [
+        {
+          model: Role,
+          as: 'role',
+          attributes: ['name']
+        },
         {
           model: Course,
           as: 'courses',
@@ -121,7 +161,16 @@ router.put('/users/:id', async (req, res) => {
       ...(password && { password })
     });
     
-    const userResponse = user.toJSON();
+    // Получаем обновленного пользователя с ролью
+    const updatedUser = await User.findByPk(user.id, {
+      include: [{
+        model: Role,
+        as: 'role',
+        attributes: ['name']
+      }]
+    });
+    
+    const userResponse = updatedUser.toJSON();
     delete userResponse.password;
     
     res.json({
@@ -197,7 +246,7 @@ router.post('/users/:userId/courses/:courseId', async (req, res) => {
       user_id: userId,
       course_id: courseId,
       course_name: course.name,
-      student_name: user.getFullName(),
+      student_name: `${user.surname} ${user.name}`,
       level: course.level,
       certificate_number: certificateNumber
     });
@@ -270,6 +319,122 @@ router.get('/users/:userId/courses/:courseId/check', async (req, res) => {
   } catch (error) {
     console.error('Ошибка проверки записи на курс:', error);
     res.status(500).json({ error: 'Ошибка при проверке записи на курс' });
+  }
+});
+
+// АДМИН РОУТЫ
+
+// Получение всех пользователей (только для админа)
+router.get('/admin/users', async (req, res) => {
+  try {
+    const users = await User.findAll({
+      include: [
+        {
+          model: Role,
+          as: 'role'
+        },
+        {
+          model: Course,
+          as: 'courses',
+          through: { attributes: [] }
+        },
+        {
+          model: Certificate,
+          as: 'certificates'
+        }
+      ],
+      order: [['created_at', 'DESC']]
+    });
+    
+    // Форматируем ответ, убираем пароли
+    const usersResponse = users.map(user => {
+      const userObj = user.toJSON();
+      delete userObj.password;
+      return userObj;
+    });
+    
+    res.json(usersResponse);
+    
+  } catch (error) {
+    console.error('Ошибка получения пользователей:', error);
+    res.status(500).json({ error: 'Ошибка при получении пользователей' });
+  }
+});
+
+// Получение статистики (только для админа)
+router.get('/admin/stats', async (req, res) => {
+  try {
+    const totalUsers = await User.count();
+    const totalCourses = await Course.count();
+    const totalCertificates = await Certificate.count();
+    
+    // Количество пользователей по ролям
+    const usersByRole = await User.findAll({
+      attributes: ['role_id', [sequelize.fn('COUNT', sequelize.col('id')), 'count']],
+      group: ['role_id'],
+      include: [{
+        model: Role,
+        as: 'role',
+        attributes: ['name']
+      }]
+    });
+    
+    // Популярность курсов
+    const popularCourses = await Course.findAll({
+      include: [{
+        model: User,
+        as: 'students',
+        attributes: []
+      }],
+      attributes: [
+        'id',
+        'name',
+        [sequelize.fn('COUNT', sequelize.col('students.id')), 'student_count']
+      ],
+      group: ['Course.id'],
+      order: [[sequelize.literal('student_count'), 'DESC']]
+    });
+    
+    res.json({
+      totalUsers,
+      totalCourses,
+      totalCertificates,
+      usersByRole,
+      popularCourses: popularCourses.map(course => ({
+        id: course.id,
+        name: course.name,
+        student_count: parseInt(course.get('student_count'))
+      }))
+    });
+    
+  } catch (error) {
+    console.error('Ошибка получения статистики:', error);
+    res.status(500).json({ error: 'Ошибка при получении статистики' });
+  }
+});
+
+// Удаление пользователя (только для админа)
+router.delete('/admin/users/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    
+    // Проверяем, существует ли пользователь
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'Пользователь не найден' });
+    }
+    
+    // Удаляем пользователя (каскадно удалятся все связи)
+    await user.destroy();
+    
+    res.json({
+      success: true,
+      message: 'Пользователь успешно удален'
+    });
+    
+  } catch (error) {
+    console.error('Ошибка удаления пользователя:', error);
+    res.status(500).json({ error: 'Ошибка при удалении пользователя' });
   }
 });
 

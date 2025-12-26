@@ -26,7 +26,12 @@ async function loadSertificates() {
     info.classList.remove("active_");
 
     const container = document.getElementById("certificatesContainer");
-    container.innerHTML = '<div class="loading">Загрузка сертификатов...</div>';
+    container.innerHTML = `
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>Загрузка сертификатов...</p>
+        </div>
+    `;
     
     try {
         // Получаем текущего пользователя
@@ -43,7 +48,11 @@ async function loadSertificates() {
         
         if (certificates && certificates.length > 0) {
             certificates.forEach(cert => {
-                const issueDate = new Date(cert.issue_date).toLocaleDateString('ru-RU');
+                const issueDate = new Date(cert.issue_date).toLocaleDateString('ru-RU', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
                 
                 html += `
                 <div class="certificate-card">
@@ -52,14 +61,11 @@ async function loadSertificates() {
                         <p class="certificate-number">№ ${cert.certificate_number}</p>
                     </div>
                     <div class="certificate-body">
-                        <p>Выдан: <strong>${cert.student_name}</strong></p>
-                        <p>За успешное прохождение курса: <strong>"${cert.course_name}"</strong></p>
-                        <p>Уровень: <strong>${cert.level}</strong></p>
-                        <p>Дата выдачи: <strong>${issueDate}</strong></p>
+                        <p><span>Выдан:</span> <strong>${cert.student_name}</strong></p>
+                        <p><span>За успешное прохождение курса:</span> <strong>"${cert.course_name}"</strong></p>
+                        <p><span>Уровень:</span> <strong>${cert.level}</strong></p>
+                        <p><span>Дата выдачи:</span> <strong>${issueDate}</strong></p>
                     </div>
-                    <button onclick="downloadCertificate(${cert.id})" class="download-btn">
-                        Скачать сертификат
-                    </button>
                 </div>
                 `;
             });
@@ -68,6 +74,9 @@ async function loadSertificates() {
             <div class="no-certificates">
                 <h5>У вас пока нет сертификатов</h5>
                 <p>Завершите курс, чтобы получить сертификат</p>
+                <button onclick="loadCourses()" class="download-btn" style="margin-top: 2vw; width: auto;">
+                    Перейти к курсам
+                </button>
             </div>
             `;
         }
@@ -79,15 +88,11 @@ async function loadSertificates() {
         container.innerHTML = `
         <div class="error">
             <h5>Ошибка при загрузке сертификатов</h5>
-            <p>${error.message}</p>
+            <p>${error.message || 'Попробуйте обновить страницу'}</p>
+            <button onclick="loadSertificates()" class="download-btn" style="margin-top: 2vw; width: auto;">
+                Повторить попытку
+            </button>
         </div>
         `;
     }
-}
-
-/**
- * Скачивание сертификата
- */
-function downloadCertificate(certificateId) {
-    alert(`Скачивание сертификата ${certificateId}`);
 }
